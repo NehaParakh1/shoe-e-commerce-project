@@ -1,30 +1,32 @@
-import React, { useState } from 'react'
-import Header from "./component/layout/Header";
-import { Fragment } from "react";
-import InputForm from "./component/input/InputForm";
-import Input from "./component/input/Input";
+import React, { useState } from 'react';
+import CartProvider from './Components/store/CartProvider'
+import './App.css';
+import ShoeForm from './Components/Shoes/ShoesForm'
+import Header from './Components/Header/Header';
+import Shoes from './Components/Shoes/Shoes';
+import Cart from './Components/Cart/Cart';
 
 function App() {
-  const[inputDetails,setInputDetails]= useState([])
-  
-  const addInputHandler=(inputData)=> {
-  setInputDetails((prevInputDetails)=>{
-    return [...prevInputDetails,{name:inputData.shoename, description:inputData.description, price:inputData.price, sizeL:inputData.sizeL, sizeM:inputData.sizeM, sizeS:inputData.sizeS, id:inputData.id}]
-  })
+  const [showCart, setShowCart] = useState(false);
+
+  const cartOpenHandler = (event) => {
+    event.preventDefault();
+    setShowCart(true);
   }
 
+  const closeHandler = (event) => {
+    event.preventDefault();
+    setShowCart(false);
+  }
 
   return (
-     <Fragment>
-      {console.log(inputDetails)};
-<Header/>
-<Input onAddInput={addInputHandler}></Input>
-<InputForm details={inputDetails}></InputForm>
-
-
-    </Fragment>
- 
-  )
+    <CartProvider>
+      <Header onClick={cartOpenHandler} />
+      <ShoeForm />
+      {showCart && <Cart onClose={closeHandler} />}
+      <Shoes />
+    </CartProvider>
+  );
 }
 
 export default App;
