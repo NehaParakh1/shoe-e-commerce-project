@@ -55,28 +55,28 @@ const ShoeForm = () => {
         <form onSubmit={submitFormHandler} style={{ display: "flex", marginTop:'120px' }}>
             <div>
                 <label>Shoe name</label>
-                <input onChange={shoeChangeHandler} id="shoeName" type="text"></input>
+                <input onChange={shoeChangeHandler} id="shoeName" type="text" value={shoename}></input>
             </div>
 
             <div>
                 <label>Description</label>
-                <input onChange={descriptionChangeHandler} id="shoeDescr" type="text"></input>
+                <input onChange={descriptionChangeHandler} id="shoeDescr" type="text" value={shoeDescr}></input>
             </div>
             <div>
                 <label>price</label>
-                <input onChange={priceChangeHandler} id="shoePrice" type="number"></input>
+                <input onChange={priceChangeHandler} id="shoePrice" type="number" value={shoePrice}></input>
             </div>
             <div>
                 <label>Size L</label>
-                <input onChange={sizeLChangeHandler} id="shoeL" type="number"></input>
+                <input onChange={sizeLChangeHandler} id="shoeL" type="number" value={sizeL}></input>
             </div>
             <div>
                 <label>Size M</label>
-                <input onChange={sizeMChangeHandler} id="shoeM" type="number"></input>
+                <input onChange={sizeMChangeHandler} id="shoeM" type="number" value={sizeM}></input>
             </div>
             <div>
                 <label >Size S</label>
-                <input onChange={sizeSChangeHandler} id="shoeS" type="number"></input>
+                <input onChange={sizeSChangeHandler} id="shoeS" type="number" value={sizeS}></input>
             </div>
 
             <button type="submit">Add Product</button>

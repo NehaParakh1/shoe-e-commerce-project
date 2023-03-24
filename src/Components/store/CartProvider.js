@@ -24,7 +24,7 @@ const addToCartHandler=(item,size)=>{
     const reqShoe = shoes[shoeIndexItem];
     console.log(reqShoe)
     if(remIndexItem){
-        if(size==="large"){
+        if(size==="large" && item.quantityLarge>0){
             setCartItemArray((prev)=>{
                 prev[remIndex]={...remIndexItem,
                            quantityLarge: remIndexItem.quantityLarge+1,
@@ -33,14 +33,15 @@ const addToCartHandler=(item,size)=>{
             });
             setShoes((prev)=>{
                 prev[remIndex]={...mIndexItem,
-                    quantityLarge:Math.max(mIndexItem.quantityLarge-1,0)
+                    quantityLarge:mIndexItem.quantityLarge-1,
                  }
                  return [...prev];
             });
             setTotalQuantity(totalQuant+1);
+            
         }
         
-        if(size==="small"){
+        if(size==="small" && item.quantitySmall>0){
             setCartItemArray((prev)=>{
                 prev[remIndex]={...remIndexItem,
                            quantitySmall: remIndexItem.quantitySmall+1,
@@ -49,14 +50,15 @@ const addToCartHandler=(item,size)=>{
             });
             setShoes((prev)=>{
                 prev[remIndex]={...mIndexItem,
-                    quantitySmall: Math.max(mIndexItem.quantitySmall-1,0)
+                    quantitySmall: mIndexItem.quantitySmall-1
                  }
                  return [...prev];
             });
             setTotalQuantity(totalQuant+1);
         }
+      
         
-        if(size==="medium"){
+        if(size==="medium" && item.quantityMedium>0){
             setCartItemArray((prev)=>{
                 prev[remIndex]={...remIndexItem,
                            quantityMedium: remIndexItem.quantityMedium+1,
@@ -65,18 +67,28 @@ const addToCartHandler=(item,size)=>{
             });
             setShoes((prev)=>{
                 prev[remIndex]={...mIndexItem,
-                    quantityMedium: Math.max(mIndexItem.quantityMedium-1,0)
+                    quantityMedium: mIndexItem.quantityMedium-1,
                  }
                  
                  return [...prev];
             });
+
             setTotalQuantity(totalQuant+1);
+        }
+        else if(size==="large" && item.quantityLarge===0){
+            alert('Out of stock')
+        }
+        else if(size==="medium" && item.quantityMedium===0){
+            alert('Out of stock')
+        }
+        else if(size==="small" && item.quantitySmall===0){
+            alert('Out of stock')
         }
         
     }
     else{
         
-if(size==="large"){
+if(size==="large" && item.quantityLarge>0){
     const inTheCart={...item,quantityLarge:1,quantityMedium:0,quantitySmall:0}
     setCartItemArray((prev)=>{
         return [...prev,inTheCart]
@@ -90,7 +102,7 @@ if(size==="large"){
     setTotalQuantity(totalQuant+1);
 }
 
-if(size==="small"){
+if(size==="small" && item.quantitySmall>0){
     const inTheCart={...item,quantityLarge:0,quantityMedium:0,quantitySmall:1}
     setCartItemArray((prev)=>{
         return [...prev,inTheCart]
@@ -104,7 +116,7 @@ if(size==="small"){
     setTotalQuantity(totalQuant+1);
 }
 
-if(size==="medium"){
+if(size==="medium" && item.quantityMedium>0){
     const inTheCart={...item,quantityLarge:0,quantityMedium:1,quantitySmall:0}
     setCartItemArray((prev)=>{
         return [...prev,inTheCart]
